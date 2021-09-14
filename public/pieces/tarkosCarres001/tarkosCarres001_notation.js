@@ -1,7 +1,6 @@
 //#ef GLOBAL VARIABLES
 
 
-
 //#ef SOCKET IO
 let ioConnection;
 
@@ -24,13 +23,111 @@ const TS = timesync.create({
 //#endef GLOBAL VARIABLES
 
 //#ef INIT
-
-
 function init() {
+
+
+  makeWorldPanel();
+  makeStaves();
+
 } // function init() END
 
 
 //#endef INIT
+
+//#ef BUILD WORLD
+
+//##ef World Canvas Variables
+let worldPanel;
+const PANEL_HEADER_HEIGHT = 30;
+const CANVAS_MARGIN = 4;
+let CANVAS_W = 393;
+let CANVAS_H = 786 - PANEL_HEADER_HEIGHT;
+let CANVAS_CENTER = CANVAS_W / 2;
+//##endef END World Canvas Variables
+
+//##ef Make World Panel
+function makeWorldPanel() {
+  worldPanel = mkPanel({
+    w: CANVAS_W,
+    h: CANVAS_H,
+    title: 'Tarkos Carré Cycle - 798483854964943964568',
+    onwindowresize: true,
+  });
+} // function makeWorldPanel() END
+//##endef Make World Panel
+
+//##ef Staff Variables
+const STAFF_NOTATION_W = CANVAS_W - (CANVAS_MARGIN * 2);
+const STAFF_NOTATION_H = 29; //LOOK AT VERT JUSTIFY
+const STAFF_TEXT_H = 30;
+const TEXT_PADDING = 2;
+const STAFF_TEXT_W = STAFF_NOTATION_W - (TEXT_PADDING * 2);
+const FULL_STAFF_H = STAFF_NOTATION_H + STAFF_TEXT_H;
+const NUMSTAVES = 11; //LOOK UP HOW TO SCROLL JSPANEL SO STAYS ON PHONE
+let staffObjectSet = [];
+let textByLineSet = [
+  "sur un cote, c'est parfait. De",
+  "l'autre cote, sur le cote, c'est",
+  "parfait. Sur les cotes c'est",
+  "parfait, ce sont les bords. Les",
+  "bords bordent chacun des cotes.",
+  "C'est range a l'interieur, ses",
+  "parties rangees, l'interieur",
+  "est range jusqu'a ses bords.",
+  "Ses bords sont bordes. Parfai-",
+  "tement range jusqu'a ses plus",
+  "beaux en toutes parts pures."
+];
+//##endef Staff Variables
+
+
+//##ef Make Staves
+function makeStaves() {
+
+  for (let staffIx = 0; staffIx < NUMSTAVES; staffIx++) {
+
+    let tobj = {};
+
+    let notationDivCanvas = mkDiv({
+      canvas: worldPanel.content,
+      w: STAFF_NOTATION_W,
+      h: STAFF_NOTATION_H,
+      top: CANVAS_MARGIN + (FULL_STAFF_H * staffIx),
+      left: CANVAS_MARGIN,
+      bgClr: 'white'
+    });
+    tobj['notationDivCanvas'] = notationDivCanvas;
+
+    let notationSvgContainer = mkSVGcontainer({
+      canvas: notationDivCanvas,
+      w: STAFF_NOTATION_W,
+      h: STAFF_NOTATION_H,
+      x: 0,
+      y: 0
+    });
+    tobj['notationSvgContainer'] = notationSvgContainer;
+
+    let textDivCanvas = mkDiv({
+      canvas: worldPanel.content,
+      w: STAFF_TEXT_W,
+      h: STAFF_TEXT_H,
+      top: CANVAS_MARGIN + STAFF_NOTATION_H + (FULL_STAFF_H * staffIx),
+      left: CANVAS_MARGIN,
+      bgClr: clr_blueGrey
+    });
+    textDivCanvas.style.padding = TEXT_PADDING.toString() + 'px';
+    textDivCanvas.style.fontSize = '27px';
+    textDivCanvas.style.textAlignLast = 'justify';
+    textDivCanvas.innerHTML = textByLineSet[staffIx];
+    tobj['textDivCanvas'] = textDivCanvas;
+
+  } // for (let staffIx = 0; staffIx < NUMSTAVES; staffIx++)
+
+} // function makeStaves() END
+//##endef Make Make Staves
+
+
+//#endef BUILD WORLD
 
 
 

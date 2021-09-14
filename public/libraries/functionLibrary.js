@@ -44,6 +44,9 @@ let mkDivCanvas = function({
   t_div.style.position = 'absolute';
   t_div.style.top = top.toString() + 'px';
   t_div.style.left = left.toString() + 'px';
+  t_div.style.borderWidth = '0px';
+  t_div.style.padding = '0px';
+  t_div.style.margin = '0px';
   return t_div;
 }
 // #endef END MAKE CANVAS DIV
@@ -196,6 +199,7 @@ let mkSpan = function({
 // #endef END mkSpan
 
 // #ef mkDiv
+//  mkDiv({canvas, w: 50, h: 20, top: 0, left: 0 ,bgClr: clr_limeGreen});
 let mkDiv = function({
   canvas,
   w = 50,
@@ -218,12 +222,16 @@ let mkDiv = function({
   tDiv.style.top = top.toString() + 'px';
   tDiv.style.left = left.toString() + 'px';
   tDiv.style.backgroundColor = bgClr;
+  tDiv.style.borderWidth = '0px';
+  tDiv.style.padding = '0px';
+  tDiv.style.margin = '0px';
   canvas.appendChild(tDiv);
   return tDiv;
 }
 // #endef END mkDiv
 
 // #ef mkSVGcontainer
+//  mkSVGcontainer( {canvas,w: 200,h: 200,x: 50,y: 50})
 let mkSVGcontainer = function({
   canvas,
   w = 200,
@@ -1516,12 +1524,12 @@ let cycleThroughSet_palindrome = function(ogSet, numCycles) {
 //#endef Cycle Through Set Functions
 
 //#ef conditionalChoose
-let conditionalChoose = function(cSet, condition){
+let conditionalChoose = function(cSet, condition) {
 
   let setToReturn = [];
 
-  for(let i=0;i<cSet.length;i++){
-    if(cSet[i]==condition){
+  for (let i = 0; i < cSet.length; i++) {
+    if (cSet[i] == condition) {
       setToReturn.push(cSet[i]);
     }
   }
@@ -1531,7 +1539,7 @@ let conditionalChoose = function(cSet, condition){
 //#endef conditionalChoose
 
 //#ef pad
-let pad = function (num, size) {
+let pad = function(num, size) {
   let s = "000000000" + num;
   return s.substr(s.length - size);
 }

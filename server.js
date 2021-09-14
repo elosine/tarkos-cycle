@@ -16,8 +16,8 @@ httpServer.listen(PORT, () => console.log(`Listening on ${ PORT }`));
 //#ef SERVE STATIC FILES THROUGH EXPRESS
 app.use(express.static(path.join(__dirname, '/public')));
 app.get('/', function(req, res) {
-  // res.sendFile(path.join(__dirname, '/public/pieces/tarkosCarrés001/tarkosCarrés001_launchPage.html'));
-  res.sendFile(path.join(__dirname, '/public/pieces/tarkosCarrés001/tarkosCarrés001.html'));
+  // res.sendFile(path.join(__dirname, '/public/pieces/tarkosCarres001/tarkosCarres001_launchPage.html'));
+  res.sendFile(path.join(__dirname, '/public/pieces/tarkosCarres001/tarkosCarres001.html'));
 });
 //#endef END SERVER STATIC FILES
 
